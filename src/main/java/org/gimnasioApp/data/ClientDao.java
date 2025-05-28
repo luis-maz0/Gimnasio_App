@@ -82,6 +82,26 @@ public class ClientDao implements IClientDao{
 
     @Override
     public boolean addClient(Client client) {
+        PreparedStatement ps;
+        Connection con = getConnection();
+        String sql = "INSERT INTO client( first_name, last_name, membership) VALUES(?,?,?)";
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setString(1, client.getFirstName());
+            ps.setString(2, client.getLastName());
+            ps.setInt(3, client.getMembership());
+            ps.execute();
+            return true;
+        }catch (Exception e){
+            System.out.println("Error al agregar cliente " + e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }catch (Exception e){
+                System.out.println("Error al cerrar la conexion " + e.getMessage());
+            }
+        }
         return false;
     }
 

@@ -17,5 +17,16 @@ public class pruebaClienteDao {
         }else {
             System.out.println("No se encontro cliente");
         }
+
+        //Agregar cliente
+        var nuevoCliente = new Client("Raul","Dominguez",300 );
+        var agregado = cliente.addClient(nuevoCliente);
+        if(agregado){
+            System.out.println("Cliente agregado exitosamente " + nuevoCliente.toString());
+        }else{
+            System.out.println("No se pudo agregar cliente");
+        }
+        //Listado de clientes
+        System.out.println("cliente.listClients() = " + cliente.listClients());
     }
 }
