@@ -45,8 +45,33 @@ public class ClientDao implements IClientDao{
         return clients;
     }
 
+    //TODO: Este metodo puede mejorar, en lugar de retornar un valor booleano, podria retornar un tipo de dato Optional<Client>.
     @Override
     public boolean findClientById(Client client) {
+        PreparedStatement ps;
+        ResultSet rs;
+        var con = getConnection();
+        var sql = "SELECT * FROM client WHERE id = ?";
+        try{
+            ps = con.prepareStatement(sql);
+            //Se rellena el parametro ?
+            ps.setInt(1, client.getId());
+            rs = ps.executeQuery();
+            if( rs.next() ){
+                client.setFirstName(rs.getString("first_name"));
+                client.setLastName( rs.getString("last_name") );
+                client.setMembership(rs.getInt("membership"));
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error al recuperar cliente por id: " + e.getMessage());
+        }finally {
+            try{
+                con.close();
+            }catch (Exception e){
+                System.out.println("Error al cerrar conexion " + e.getMessage() );
+            }
+        }
         return false;
     }
 
