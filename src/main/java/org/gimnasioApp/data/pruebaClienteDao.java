@@ -5,6 +5,7 @@ import org.gimnasioApp.domain.Client;
 public class pruebaClienteDao {
     public static void main(String[] args) {
         IClientDao cliente = new ClientDao();
+        /*
         //Listado de clientes
         var clientes = cliente.listClients();
         clientes.forEach(System.out::println);
@@ -36,6 +37,17 @@ public class pruebaClienteDao {
             System.out.println("El cliente se modifico correctamente " + modificarCliente.toString());
         }else {
             System.out.println("No se pudo modificar el cliente");
+        }
+        System.out.println("cliente.listClients() = " + cliente.listClients());
+        //Eliminar un cliente
+        */
+        var clienteEliminar = new Client(5);
+        var eliminado = cliente.deleteClient(clienteEliminar);
+
+        if(eliminado){
+            System.out.println("Cliente elimando " + clienteEliminar.toString());
+        }else{
+            System.out.println("No se elimino cliente");
         }
     }
 }

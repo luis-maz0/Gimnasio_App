@@ -77,6 +77,25 @@ public class ClientDao implements IClientDao{
 
     @Override
     public boolean deleteClient(Client client) {
+        PreparedStatement ps;
+        Connection con = getConnection();
+
+        String sql = "DELETE FROM client WHERE id = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, client.getId());
+            ps.execute();
+            return true;
+        }catch (Exception e){
+            System.out.println("Error al agregar cliente " + e.getMessage());
+        }
+        finally {
+            try{
+                con.close();
+            }catch (Exception e){
+                System.out.println("Error al cerrar la conexion " + e.getMessage());
+            }
+        }
         return false;
     }
 
