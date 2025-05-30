@@ -28,5 +28,14 @@ public class pruebaClienteDao {
         }
         //Listado de clientes
         System.out.println("cliente.listClients() = " + cliente.listClients());
+
+        //Modificacion cliente
+        var modificarCliente = new Client(5, "Raul", "Rodriguez",200);
+        var modificado = cliente.updateClient(modificarCliente);
+        if(modificado){
+            System.out.println("El cliente se modifico correctamente " + modificarCliente.toString());
+        }else {
+            System.out.println("No se pudo modificar el cliente");
+        }
     }
 }
