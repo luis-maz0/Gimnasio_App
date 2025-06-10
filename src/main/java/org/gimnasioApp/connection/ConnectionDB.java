@@ -9,7 +9,6 @@ public class ConnectionDB {
         Connection connection = null;
 
         Dotenv dotenv = Dotenv.load();
-
         String dbName = dotenv.get("DB_NAME");
         String user = dotenv.get("DB_USER");
         String pass = dotenv.get("DB_PASS");
